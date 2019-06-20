@@ -231,6 +231,9 @@ class Backend(object):
             backend = app._tasks[callback.task].backend
         except KeyError:
             backend = self
+        # Temp fix
+        if callback.id is None:
+            callback.id = callback.tasks[0].id
         try:
             group(
                 [app.signature(errback)
